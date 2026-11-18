@@ -1,0 +1,8 @@
+{
+  "rutas": [
+    { "origen": "Liberia", "destino": "Cañas", "tiempo": 65 },
+    { "origen": "Cañas", "destino": "Alajuela", "tiempo": 90 },
+    { "origen": "Alajuela", "destino": "San José", "tiempo": 30 },
+    { "origen": "San José", "destino": "Limón", "tiempo": 160 }
+  ]
+}

@@ -1,0 +1,34 @@
+name: ConviTEC CI
+
+on:
+  push:
+    branches: [ main, development ]
+  pull_request:
+    branches: [ main, development ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Descargar el código del repositorio
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    # 2. Configurar el SDK de .NET (versión 8.0 recomendada para C# moderno)
+    - name: Configurar .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    # 3. Restaurar las dependencias de NuGet
+    - name: Restaurar dependencias
+      run: dotnet restore ConviTEC.sln
+
+    # 4. Compilar la solución completa para verificar que no hay errores de sintaxis
+    - name: Compilar solución
+      run: dotnet build ConviTEC.sln --configuration Release --no-restore
+
+    # 5. Ejecutar automáticamente todas las pruebas unitarias
+    - name: Ejecutar Pruebas Unitarias
+      run: dotnet test ConviTEC.sln --configuration Release --no-build --verbosity normal
